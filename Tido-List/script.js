@@ -3,7 +3,7 @@ let tlt;
 let desc;
 let status;
 let MyTodo = [];
-
+let curr_index = -1;
 let todo = document.getElementById('Todo');
 todo.addEventListener("click", (e)=>{
     e.preventDefault();
@@ -40,8 +40,15 @@ function editKrdoBhai(index){
     console.log(index)
     let Editname = document.getElementById("Editname");
     let EditTlt = document.getElementById("EditTlt");
-    MyTodo[index].desc = Editname.value;
-    MyTodo[index].tlt = EditTlt.value;
+    Editname.value = MyTodo[index].desc;
+    EditTlt.value = MyTodo[index].tlt;
+    curr_index = index;
+}
+function saveTodoTask(){
+    let Editname = document.getElementById("Editname");
+    let EditTlt = document.getElementById("EditTlt");
+    MyTodo[curr_index].desc = Editname.value;
+    MyTodo[curr_index].tlt = EditTlt.value;
     localStorage.setItem('myTodoJson', JSON.stringify(MyTodo))
     myShow();
     Editname.value = " ";
